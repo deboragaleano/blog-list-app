@@ -27,10 +27,22 @@ app.use(cors())
 app.use(express.json())
 
 //ROUTES
-
 /* Get request */
-app.get('/', (req, res) => {
-    res.send('hello')
+app.get('/api/blogs', (req, res) => {
+    Blog.find({})
+        .then(blogs => {
+            res.json(blogs)
+        })
+})
+
+/* Post request */
+app.post('/api/blogs', (req, res) => {
+    const newBlog = new Blog(req.body)
+
+    newBlog.save()
+        .then(result => {
+            res.status(201).json(result) // created success status code 
+    })
 })
 
 
