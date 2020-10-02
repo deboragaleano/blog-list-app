@@ -15,7 +15,15 @@ const totalLikes = (blogs) => {
            ? 0 : total.reduce((a, b) => a + b)
 }
 
+
+//Define a new favoriteBlog function that receives a list of blogs as a parameter. The function finds out which blog has most likes. If there are many top favorites, it is enough to return one of them.
+const favoriteBlog = (blogs) => {
+   const maxNum = Math.max(...blogs.map(b => b.likes))
+   return blogs.find(b => b.likes === maxNum)
+}
+
 module.exports = {
     dummy,
-    totalLikes
+    totalLikes,
+    favoriteBlog
 }
