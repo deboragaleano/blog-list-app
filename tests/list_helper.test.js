@@ -125,15 +125,20 @@ const mostLikes = require('../utils/list_helper').mostLikes
 
 describe('returns blog largest amounts of likes', () => {
     /* CHECK THIS ONE IF IT'S CORRECT - how to NOT hardcode the this object below */
-    const authorWithMostLikes = {
-        author: "Edsger W. Dijkstra",
-        likes: 12
-      }
+    // const authorWithMostLikes = {
+    //     author: "Edsger W. Dijkstra",
+    //     likes: 12
+    //   }
 
     test.only('returns author that has larges amount of likes', () => {
-        expect(mostLikes(blogsList)).toEqual(authorWithMostLikes)
+        expect(mostLikes([{author: 'this', likes: 18},{author: 'this', likes: 22}, {author: 'this', likes: 20},])).toEqual({author: 'this', likes: 22})
     })
 
 })
 
 
+/* TODO * 
+
+- Refactor mostBlogs TEST SUITE 
+
+ */
