@@ -120,3 +120,20 @@ describe('most blogs', () => {
     })
 
 })
+
+const mostLikes = require('../utils/list_helper').mostLikes
+
+describe('returns blog largest amounts of likes', () => {
+    /* CHECK THIS ONE IF IT'S CORRECT - how to NOT hardcode the this object below */
+    const authorWithMostLikes = {
+        author: "Edsger W. Dijkstra",
+        likes: 12
+      }
+
+    test.only('returns author that has larges amount of likes', () => {
+        expect(mostLikes(blogsList)).toEqual(authorWithMostLikes)
+    })
+
+})
+
+

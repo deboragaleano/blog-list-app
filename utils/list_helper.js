@@ -37,9 +37,32 @@ const mostBlogs = (blogs) => {
     return mostBlogs; 
 }
 
+// Define a function called mostLikes that receives an array of blogs as its parameter. 
+// The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
+const mostLikes = (blogs) => {
+    // const getAuthors = blogs.map(b => b.author)
+    // console.log(getAuthors);
+    // // found function here: https://gist.github.com/ralphcrisostomo/3141412 
+    // const result = getAuthors.reduce((b,c)=>((b[b.findIndex(d=>d.author===c)]||b[b.push({author:c,blogs:0})-1]).blogs++,b),[]);
+    const getKeys = _.map(blogs, (blog) => {
+        return _.pick(blog, ['author', 'likes'])
+    })
+
+    const mostLikes = _.maxBy(getKeys, 'likes');
+
+    return mostLikes; 
+}
+
 module.exports = {
     dummy,
     totalLikes,
     favoriteBlog,
+    mostLikes, 
     mostBlogs
 }
+
+/* TODO * 
+
+- Refactor mostBlogs function with Lodash 
+
+ */
