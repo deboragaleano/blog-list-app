@@ -100,9 +100,23 @@ describe('favorite blog', () => {
             __v: 0 }
 
     test('returns favorite blog', () => {
+        //NB when you are comparing objects, the toEqual method is probably what you want to use, since the toBe tries to verify that the two values are the same value, and not just that they contain the same properties.
         expect(favoriteBlog(blogsList)).toEqual(higherLikes)
     })
 
 })
 
+const mostBlogs = require('../utils/list_helper').mostBlogs
 
+describe('most blogs', () => {
+    /* CHECK THIS ONE IF IT'S CORRECT - how to not hardcode the this object below */
+    const authorWithMostBlogs = {
+        author: "Robert C. Martin",
+        blogs: 3
+      }
+
+    test('returns author that has most blogs', () => {
+        expect(mostBlogs(blogsList)).toEqual(authorWithMostBlogs)
+    })
+
+})
