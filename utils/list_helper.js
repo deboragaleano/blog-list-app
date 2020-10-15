@@ -60,9 +60,3 @@ module.exports = {
     mostLikes, 
     mostBlogs
 }
-
-/* TODO * 
-
-- Refactor mostBlogs function with Lodash 
-
- */

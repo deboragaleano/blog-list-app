@@ -136,9 +136,3 @@ describe('returns blog largest amounts of likes', () => {
 
 })
 
-
-/* TODO * 
-
-- Refactor mostBlogs TEST SUITE 
-
- */
