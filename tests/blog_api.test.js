@@ -43,11 +43,14 @@ const initialBlogs = [
         __v: 0 }
 ]
 
+//The database is cleared out at the beginning
+//and after that we save each blog stored in the initialBlogs array to the database. 
+//Doing this, we ensure that the database is in the same state before every test is run.
 beforeEach(async () => {
     await Blog.deleteMany({})
-    for(let note of initialBlogs) {
-        let noteObject = new Blog(note); 
-        await noteObject.save()
+    for(let blog of initialBlogs) {
+        let blogObject = new Blog(blog); 
+        await blogObject.save()
     }
 })
 
@@ -62,6 +65,16 @@ test('there are 6 blogs', async() => {
     const response = await api.get('/api/blogs')
 
     expect(response.body).toHaveLength(6)
+})
+
+/* CHECK: is this the right way? */
+test('blog posts have unique ID', async() => {
+    const response = await api.get('/api/blogs')
+
+    //Used to create an array containing the ID of every blog returned by the API
+    const checkId = response.body.map(b => b.id); 
+
+    expect(checkId).toBeDefined()
 })
 
 afterAll(() => {
