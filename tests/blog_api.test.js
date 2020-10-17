@@ -1,3 +1,4 @@
+const { get } = require('lodash');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
@@ -76,6 +77,31 @@ test('blog posts have unique ID', async() => {
 
     expect(checkId).toBeDefined()
 })
+
+
+test('blog is succesfully created', async() => {
+    
+    // verifies that making an HTTP POST request to the /api/blogs url successfully creates a new blog post
+    const newBlog = {
+        title: 'something',
+        author: 'me'
+    }
+    
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        // You can verify that the content of the blog post is saved correctly to the database.
+        .expect('Content-Type', /application\/json/)
+
+    
+    // verify that the total number of blogs in the system is increased by one.
+    const response = await api.get('/api/blogs')
+
+    expect(response.body).toHaveLength(initialBlogs.length + 1)
+})
+
+
 
 afterAll(() => {
     mongoose.connection.close()
