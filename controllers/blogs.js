@@ -21,10 +21,14 @@ blogsRouter.post('/', (req, res) => {
         newBlog.likes = 0
     }
 
-    newBlog.save()
-        .then(result => {
-            res.status(201).json(result) // created success status code 
-    })
+    if(!req.body.title || !req.body.url) {
+        res.status(400).json({message: 'title or url are missing'}) 
+    } else {
+        newBlog.save()
+            .then(result => {
+                res.status(201).json(result)
+            })
+    }
 })
 
 module.exports = blogsRouter

@@ -116,6 +116,25 @@ test('if blog likes property is empty, default to 0', async() => {
     })
 })
 
+
+// Write a test related to creating new blogs via the /api/blogs endpoint, 
+// that verifies that if the title and url properties are missing from the request data, 
+// the backend responds to the request with the status code 400 Bad Request.
+// Make the required changes to the code so that it passes the test.
+test('if blog title and url properties are missing, expect 400 status code', async() => {
+    const newBlog = {
+        author: 'me again'
+    }
+
+    await api
+    .post('/api/blogs')
+    .send(newBlog)
+    //* CHECK IF THIS IS OK! */
+    .then(res => {
+        expect(res.status).toBe(400);
+    })
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
