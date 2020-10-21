@@ -15,7 +15,11 @@ blogsRouter.get('/', async (req, res) => {
 /* Post request */
 blogsRouter.post('/', (req, res) => {
     const newBlog = new Blog(req.body)
-    newBlog.likes = 0
+
+    // CHECK if correct! - if property likes is not defined, default to 0 
+    if(!req.body.likes) {
+        newBlog.likes = 0
+    }
 
     newBlog.save()
         .then(result => {
