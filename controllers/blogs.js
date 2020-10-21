@@ -15,6 +15,7 @@ blogsRouter.get('/', async (req, res) => {
 /* Post request */
 blogsRouter.post('/', (req, res) => {
     const newBlog = new Blog(req.body)
+    newBlog.likes = 0
 
     newBlog.save()
         .then(result => {

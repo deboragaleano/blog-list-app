@@ -1,4 +1,3 @@
-const { get } = require('lodash');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
@@ -101,7 +100,21 @@ test('blog is succesfully created', async() => {
     expect(response.body).toHaveLength(initialBlogs.length + 1)
 })
 
+//Write a test that verifies that if the likes property is missing from the request, 
+//it will default to the value 0. 
+test('if blog likes property is empty, default to 0', async() => {
+    const newBlog = {
+        title: 'blog without likes expect 0',
+        author: 'me again'
+    }
 
+    await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .then(res => {
+        expect(res.body.likes).toBe(0)
+    })
+})
 
 afterAll(() => {
     mongoose.connection.close()
